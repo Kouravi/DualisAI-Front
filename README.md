@@ -1,36 +1,171 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <img src="public/samples/logo_r.png" width="90" alt="DUALIS Logo" />
 
-## Getting Started
+# 🧠 DUALIS — AI HumanPets
+**Descubre qué tipo de mascota tienes o qué persona ves**  
+Plataforma interactiva donde una IA analiza imágenes de personas o animales y devuelve información divertida y estimaciones.
+</div>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ ¿Qué hace DUALIS?
+
+✔ Subes una imagen o eliges una miniatura de ejemplo  
+✔ Seleccionas un modelo → **Humano** o **Mascota**  
+✔ La IA predice y muestra sobre la imagen:
+
+### Para Humanos:
+- 👤 Género (Hombre / Mujer)
+- 🎯 Estimación de edad
+- 💬 Mensaje personalizado emocional
+
+### Para Mascotas:
+- 🐾 Especie (Perro / Gato)
+- 💬 Mensaje cariñoso sobre la mascota
+
+Además:
+
+🔹 Historial de predicciones almacenado en localStorage (hasta 10 items)  
+🔹 Animaciones UI: fading, hover reveal, image shrinking  
+🔹 Galería en Home para pruebas rápidas con predicción automática  
+🔹 El usuario controla qué imagen visualizar y puede eliminarla  
+
+---
+
+## 🏗️ Arquitectura
+
+**Frontend**
+    **Tecnologias:** Next.js 14 + React 19 + Tailwind CSS
+        **Descripción:** Interfaz UI/UX limpia y moderna.
+**Backend**
+    **Tecnologias:** FastAPI (Python3)
+        **Descripción:** Proporciona los modelos IA mediante una API REST.
+**Modelos IA**
+    **Tecnologias:** TensorFlow / Keras
+        **Descripción:** Clasificación de género, edad y mascotas.
+**DB**
+    **Tecnologias:** MongoDB con Motor (async)
+        **Descripción:** Guarda predicciones y sus resultados históricos.
+**Estado**
+    **Tecnologias:** localStorage + React Context
+        **Descripción:** Mantiene historial y selección actual.
+
+---
+
+## 🚀 Ejecución del proyecto
+
+### 🐍 Backend (FastAPI)
+
+Requisitos:
+
+```sh
+pip install -r requirements.txt
+```
+Ejecutar:
+
+```sh
+uvicorn main:app --reload
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+API disponible en:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+http://127.0.0.1:8000/
+```
+### 💻 Frontend (Next.js + Tailwind)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Instalar dependencias:
 
-## Learn More
+```sh
+cd front-aihumanpets
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Modo desarrollo:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Abrir en navegador:
 
-## Deploy on Vercel
+```sh
+http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Asegúrate de tener NEXT_PUBLIC_API_URL configurado para apuntar al backend:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+```
+
+---
+
+## 🧩 Endpoints API (FastAPI)
+
+**Metodo:** POST
+    **Ruta:** /api/predict
+        **Descripción:** Recibe una imagen y devuelve predicción.
+**Metodo:** GET
+    **Ruta:** /api/predict/all
+        **Descripción:** Lista todas las predicciones guardadas.
+**Metodo:** GET
+    **Ruta:** /
+        **Descripción:** Verrificar funcionamiento.
+
+## 📌 Ejemplo respuesta:
+
+```json
+{
+  "resultado": {
+    "genero": "Observo una mujer",
+    "edad_estimacion": "De edad entre 20 y 25 años",
+    "mensaje": "¡Simplemente cautivadora!"
+  }
+}
+```
+
+## 🧠 Modelos IA
+
+### Humano
+
+Dataset: **UTKFace**
+Salidas:
+    Genero (0 Hombre/ 1 Mujer)
+    Estimación de edad (rango)
+
+### Mascota
+
+Dataset: **cats_and_dogs_filtered**
+Clasificacion:
+    🐶 Dog
+    🐱 Cat
+
+## 🧩 Características UI
+
+UploadBox con arrastrar y soltar
+
+Visualización con overlay borroso + tipografía manuscrita (“Great Vibes”)
+
+Galería con animaciones y scroll suave
+
+Botones inteligentes (solo habilitan si todo está listo)
+
+Responsive para móviles y escritorio
+
+## 🧪 Pruebas recomendadas
+
+Puedes probar con las miniaturas incluidas:
+
+📁 public/samples/human
+📁 public/samples/pets
+
+# 🧑‍💻 Autor
+
+Kouravi — Ingeniero
+🔗 LinkedIn: https://linkedin.com/in/jdlod
+
+🐙 GitHub: https://github.com/Kouravi/DUALIS
+
+¡Gracias por usar DUALIS! 💙
+La IA puede fallar. Verifica siempre datos importantes 🧠✨
