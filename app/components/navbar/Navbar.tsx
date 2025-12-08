@@ -77,7 +77,7 @@ export default function Navbar() {
 
           {/* Right side icons */}
           <div className="flex items-center gap-3">
-            <a href="https://github.com/Kouravi/DUALIS" target="_blank">
+            <a href="https://github.com/Kouravi?tab=repositories" target="_blank">
               <img src="/samples/github.png" className="h-8 w-8 hover:opacity-80" />
             </a>
             <a href="https://linkedin.com/in/jdlod" target="_blank">
